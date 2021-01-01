@@ -9,11 +9,13 @@ import CalendaViewDayIcon from "@material-ui/icons/CalendarViewDay"
 import Post from './Post'
 import { db } from './firebase'
 import firebase from "firebase"
-import FlipMove from "react-flip-move"
+import { useSelector } from 'react-redux'
+import { selectuser } from './features/userSlice'
 
 function Feed() {
-    const [posts, setPosts] = useState ([])
-    const [input, setInput] = useState ("")
+    const [posts, setPosts] = useState ([]);
+    const [input, setInput] = useState ("");
+    const user = useSelector(selectuser);
 
     useEffect(() => {
         db.collection("posts").orderBy("timestamp", "desc")
@@ -32,10 +34,11 @@ function Feed() {
         e.preventDefault ();
 
         db.collection("posts").add({
-            name: "Seemore Butts",
-            description: "CEO at Seeing More Butts",
+            name: user.displayName,
+            description: user.email,
             message: input,
             photoUrl: "",
+            avatar: user.photoUrl,
             timestamp: firebase.firestore.FieldValue.serverTimestamp (),
         });
         setInput ("");
@@ -59,21 +62,21 @@ function Feed() {
                <InputOption Icon = {CalendaViewDayIcon} title ="Write Article" color="#990000"  />
                </div>
            </div>
+
+           {posts.map(({id, data:{name, description, message, photoUrl, avatar} }) => (
+               <Post
+                    key= {id}
+                    name={name}
+                    description={description}
+                    message={message}
+                    photoUrl={photoUrl}
+                    avatar={avatar}
+               />
+           ))}
+          
            <Post name= "Beany Baby" description= "Founder at your moma's place" message= 
-                "your mom is still angry with me for rubbing pepper on her butt plug" 
-                photoUrl="/images/bean.jpeg" avatar="/images/beany.jpg"/>
-           <FlipMove>                
-                {posts.map(({id, data:{name, description, message, photoUrl, avatar} }) => (
-                    <Post
-                            key= {id}
-                            name={name}
-                            description={description}
-                            message={message}
-                            photoUrl={photoUrl}
-                            avatar={avatar}
-                    />
-                ))}  
-           </FlipMove> 
+           "your mom is still angry with me for rubbing pepper on her butt plug" 
+           photoUrl="/images/bean.jpeg" avatar="/images/beany.jpg"/>
         </div>
     )
 }
