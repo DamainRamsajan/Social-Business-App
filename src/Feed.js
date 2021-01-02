@@ -73,9 +73,10 @@ function Feed() {
                
                 
                     <form onSubmit= {onFileSubmit}>
-                        <input type="file" onChange = {onFileChange} />
-                        <button onClick= {onFileSubmit}/>
-                        <InputOption Icon = {ImageIcon} title ="Photo" color="#990000" />
+                        
+                        <label for="actual-btn"> <InputOption Icon = {ImageIcon} title ="Photo" color="#990000"/></label>
+                        
+                        <input type="file" onChange = {onFileChange} id="actual-btn" hidden />
                     </form>
                 
                 <InputOption Icon = {SubscriptionsIcon} title ="Video" color="#990000"  />
