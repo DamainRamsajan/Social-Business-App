@@ -7,7 +7,7 @@ import SubscriptionsIcon from "@material-ui/icons/Subscriptions"
 import EventNoteIcon from "@material-ui/icons/EventNote"
 import CalendaViewDayIcon from "@material-ui/icons/CalendarViewDay"
 import Post from './Post'
-import { db } from './firebase'
+import { firebaseApp, db } from './firebase'
 import firebase from "firebase"
 import { useSelector } from 'react-redux'
 import { selectuser } from './features/userSlice'
@@ -16,6 +16,7 @@ function Feed() {
     const [posts, setPosts] = useState ([]);
     const [input, setInput] = useState ("");
     const user = useSelector(selectuser);
+    const [photoUrl, setPhotoUrl] = useState (null)
 
     useEffect(() => {
         db.collection("posts").orderBy("timestamp", "desc")
@@ -37,12 +38,24 @@ function Feed() {
             name: user.displayName,
             description: user.email,
             message: input,
-            photoUrl: "",
-            avatar: user.photoUrl,
+            photoUrl: photoUrl,
+            avatar: user.avatar,
             timestamp: firebase.firestore.FieldValue.serverTimestamp (),
         });
         setInput ("");
     };
+
+    const onFileChange = async (e) => {
+        const file = e.target.files[0];
+        const storageRef = firebaseApp.storage().ref()
+        const fileRef = storageRef.child(file.name)
+        await fileRef.put(file)
+        setPhotoUrl (await fileRef.getDownloadURL())
+    }
+
+    const onFileSubmit = (e) => {
+        e.preventDefault ()
+    }
 
     return (
         <div>
@@ -52,14 +65,22 @@ function Feed() {
                    <form>
                         <input value = {input} onChange={e => setInput (e.target.value)}  type="text" />
                         <button onClick={sendPost} type = "submit">Send</button>
+                        <img src="/images/logo.png" alt="" />
                    </form>
                </div>
 
                <div className = "feed__inputOptions">
-               <InputOption Icon = {ImageIcon} title ="Photo" color="#990000"  />
-               <InputOption Icon = {SubscriptionsIcon} title ="Video" color="#990000"  />
-               <InputOption Icon = {EventNoteIcon} title ="Event" color="#990000"  />
-               <InputOption Icon = {CalendaViewDayIcon} title ="Write Article" color="#990000"  />
+               
+                
+                    <form onSubmit= {onFileSubmit}>
+                        <input type="file" onChange = {onFileChange} />
+                        <button onClick= {onFileSubmit}/>
+                        <InputOption Icon = {ImageIcon} title ="Photo" color="#990000" />
+                    </form>
+                
+                <InputOption Icon = {SubscriptionsIcon} title ="Video" color="#990000"  />
+                <InputOption Icon = {EventNoteIcon} title ="Event" color="#990000"  />
+                <InputOption Icon = {CalendaViewDayIcon} title ="Write Article" color="#990000"  />
                </div>
            </div>
 

@@ -25,6 +25,11 @@
     display: flex;
     width: 100%;
 }
+.feed__input > form > img {
+    object-fit: contain;
+    height: 40px;
+    width: 40px;
+}
 
 .feed__input >form >input {
     border: none;

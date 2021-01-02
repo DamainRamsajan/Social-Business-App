@@ -40,7 +40,7 @@ function Login() {
                 email: userAuth.email,
                 uId: userAuth.uId,
                 displayName: userAuth.displayName,
-                photoUrl: userAuth.photoURL,
+                avatar: userAuth.photoURL,
             }))
         }).catch(error => alert(error));
     };

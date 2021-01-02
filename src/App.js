@@ -22,7 +22,7 @@ function App() {
           email:userAuth.email,
           uId: userAuth.uid,
           displayName: userAuth.displayName,
-          photoUrl: userAuth.photoURL,
+          avatar: userAuth.photoURL,
         }) )
       }else{
         dispatch(logout());
