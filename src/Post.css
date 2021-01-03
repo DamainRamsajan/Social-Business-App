@@ -23,8 +23,13 @@
 
 .post__body {
     overflow-wrap: anwhere;
-}
 
+}
+.post__body > img{
+    object-fit: contain;
+    width: 800px;
+    max-width: 800px;
+}
 .post__body >p {
     margin-bottom: 10px;
 }

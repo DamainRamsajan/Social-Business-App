@@ -44,7 +44,7 @@ function Header() {
                 <HeaderOption Icon= {NotificationsIcon} title = "Notifications" />
                       
                 <Avatar 
-                 src = {user?.photoUrl}
+                 src = {user?.avatar}
                  onClick={logoutOfApp} 
                  className = "header__avatar" />             
 

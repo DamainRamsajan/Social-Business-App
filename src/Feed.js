@@ -64,8 +64,9 @@ function Feed() {
                    <CreateIcon />
                    <form>
                         <input value = {input} onChange={e => setInput (e.target.value)}  type="text" />
-                        <button onClick={sendPost} type = "submit">Send</button>
+                        <button onClick={sendPost} type = "submit">send</button>
                         <img src="/images/logo.png" alt="" />
+                        
                    </form>
                </div>
 
