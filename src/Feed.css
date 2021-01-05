@@ -48,3 +48,30 @@
     display: flex;
     justify-content: space-evenly;
 }
+.feed__popup {
+    position: fixed;
+    height: 500px !important;
+    width: 600px !important;
+    border-radius: 16px;
+    display: grid;
+    place-items: center;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-top: 20px;
+    padding-bottom: 20px;  
+    background: linear-gradient(180deg, rgba(19,38,79,1) 0%, rgba(22,147,198,1) 52%, rgba(255,255,255,0.6) 82%);
+    /* overflow: hidden;  */
+    z-index: 100;
+}
+.feed__popupImage {
+    object-fit: contain;
+    height: 350px;
+    width: 550px;
+    padding: 20px;
+    margin-bottom: 10px;
+}
+.feed__popupButton {
+    z-index: 1000;
+}

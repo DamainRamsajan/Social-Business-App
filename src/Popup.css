@@ -1,0 +1,11 @@
+
+.popup > span > button {
+    background-color: darkred !important ;
+    color: white !important;
+    font-size: larger !important;
+    margin-left: 20px;
+}
+.popup > span > button:hover {
+    background-color: rgb(254,75,61);
+    color: rgb(248, 241, 147);
+}

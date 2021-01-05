@@ -12,8 +12,32 @@ function Login() {
     const [name, setName] = useState ("");
     const [profilePic, setProfilePic] = useState ("");
     const dispatch = useDispatch();
+    const [registrationFormStatus, setRegistartionFormStatus] = useState(false);
+   
 
-
+    const loginProps = useSpring({ 
+        left: registrationFormStatus ? -500 : 0, // Login form sliding positions
+    });
+    const registerProps = useSpring({
+          
+        left: registrationFormStatus ? 0 : 500, // Register form sliding positions 
+    });
+    function registerClicked() {
+        setRegistartionFormStatus(true);
+      }
+    function loginClicked() {
+        setRegistartionFormStatus(false);
+    }
+    const loginBtnProps = useSpring({
+        borderBottom: registrationFormStatus 
+          ? "solid 0px transparent"
+          : "solid 2px #FE4B3D",  //Animate bottom border of login button
+    });
+    const registerBtnProps = useSpring({
+        borderBottom: registrationFormStatus
+          ? "solid 2px #FE4B3D"
+          : "solid 0px transparent", //Animate bottom border of register button
+    });
 
     const register = () => {
         if (!name){
@@ -47,6 +71,14 @@ function Login() {
             }))
         }).catch(error => alert(error));
     };
+    const demoLogin = (e) => {
+        dispatch(login({
+            email: "demo@demo.com",
+            uId: ("demoId"),
+            displayName: "demoUser",
+            avatar: "/images/zeus.png",
+        }))
+    }
 
     return (
         <div className = "container">
@@ -56,29 +88,45 @@ function Login() {
                 
                 <div className = "nav__buttons">
                     <animated.button 
-                       
+                       onClick = {loginClicked}
+                       style = {loginBtnProps}
                     >Sign In</animated.button>
+                    
                     <animated.button 
-                       
+                       onClick={registerClicked}
+                       style = {registerBtnProps}
                     >Register</animated.button>
                     
                 </div>
-                <form>
+                {!registrationFormStatus && <div className = "login__registerForm">
+                <animated.form action = "" id = "loginForm" style = {loginProps}>
+                    
+                    <input value ={email} onChange = {e => setEmail(e.target.value)} type = "email" placeholder = "email" />
+                    <input value ={password} onChange = {e => setPassword(e.target.value)} type = "password" placeholder = "Password" />
+                    <Button type = "submit" onClick = {loginToApp}>Sign In</Button>
+                    <Button type = "submit" onClick = {demoLogin}>Demo Sign In</Button>
+                    {/* <Button type = "submit" onClick = {demoLogin}>Sign up With Google</Button> */}
+                </animated.form> 
+                </div>}
+
+                {registrationFormStatus && <div className = "login__registerForm">
+                
+                <animated.form  action = "" id = "registerForm" style = {registerProps}>
                     <input value ={name} onChange = {e => setName(e.target.value)} type ="text" placeholder = "Full Name (Required if Registering)" />
                     <input value ={profilePic} onChange = {e => setProfilePic(e.target.value)} type ="text" placeholder ="Upload Profile Picture" />
                     {/* <input type="file" onChange = {onFileChange} id="actual-btn" hidden /> */}
                     <input value ={email} onChange = {e => setEmail(e.target.value)} type = "email" placeholder = "email" />
                     <input value ={password} onChange = {e => setPassword(e.target.value)} type = "password" placeholder = "Password" />
-                    <Button type = "submit" onClick = {loginToApp}>Sign In</Button>
-                </form>   
-                <p> Not a Member?  
-
-                    <span className = "login__register" onClick = {register}> Register Now</span>
-                </p>         
+                    <Button type = "submit" onClick = {loginToApp}>Register</Button>                        
+                </animated.form> 
+                
+                </div>}                
+                    
             </div>
         </div>
         
     )
 }
+
 
 export default Login

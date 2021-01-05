@@ -19,7 +19,9 @@ function Sidebar() {
         <div className = "sidebar">
             <div className = "sidebar__top">
                 <img src ="/images/header-background.jpg" alt = ""/>
-                <Avatar className = "sidebar__avatar" src = {user?.avatar} />
+                <Avatar className = "sidebar__avatar" src = {user?.avatar}/>
+                    {/* {user?.email[0]?.toUpperCase()} */}
+                {/* </Avatar> */}
                    
                 <h2>{user?.displayName}</h2>
                 <h4>{user?.email}</h4>

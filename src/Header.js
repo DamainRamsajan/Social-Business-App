@@ -46,7 +46,9 @@ function Header() {
                 <Avatar 
                  src = {user?.avatar}
                  onClick={logoutOfApp} 
-                 className = "header__avatar" />             
+                 className = "header__avatar"/>
+                     {/* {user?.email[0]?.toUpperCase()} */}
+                {/* </Avatar>              */}
 
             </div>
         </div>

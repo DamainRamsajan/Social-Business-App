@@ -18,7 +18,8 @@
       cursor: pointer;
       outline: none;
       background: none!important;
-      color: white;      
+      color:#C0C0C0;  
+      padding-bottom: 8px;    
 }
     button.focus {
     outline: 0px;
@@ -47,10 +48,11 @@
     margin-left: 20px;
     width: 386px;
 }
-.login >form {
+.login__registerForm >form {
     display: flex;
     flex-direction: column;
     align-items: center;
+    
 }
 .login > form > input {
     width: 350px;
@@ -60,6 +62,7 @@
     margin-bottom: 10px;
     border-radius: 5px;
 }
+
 .login > form > button {
     width: 366px;
     background-color: rgb(143,25, 22);
@@ -68,8 +71,32 @@
     font-size: larger;
     color: white;
     box-shadow: 2 2 2 2 rgb(0, 0, 0.24);
+    margin-bottom: 10px;
 }
 .login > form > button:hover {
+    background-color: rgb(254,75,61);
+    color: rgb(248, 241, 147);
+}
+.login__registerForm > form > input {
+    width: 350px;
+    height: 50px;
+    font-size: 20px;
+    padding-left: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+}
+
+.login__registerForm > form > button {
+    width: 366px;
+    background-color: rgb(143,25, 22);
+    height: 55px;
+    border-radius: 5px;
+    font-size: larger;
+    color: white;
+    box-shadow: 2 2 2 2 rgb(0, 0, 0.24);
+    margin-bottom: 10px;
+}
+.login__registerForm > form > button:hover {
     background-color: rgb(254,75,61);
     color: rgb(248, 241, 147);
 }

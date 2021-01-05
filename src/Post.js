@@ -6,12 +6,17 @@ import ThumbsUpAltOutlinedIcon from "@material-ui/icons/ThumbUpAltOutlined"
 import ChatOutlinedIcon from "@material-ui/icons/ChatOutlined"
 import ShareOutlinedIcon from "@material-ui/icons/ShareOutlined"
 import SendOutlinedIcon from "@material-ui/icons/SendOutlined"
+import { useSelector } from 'react-redux'
+import { selectuser } from './features/userSlice'
 
 const Post = forwardRef(({name, description, message, photoUrl, avatar}, ref) => {
+    // const user = useSelector(selectuser); 
     return (
         <div ref = {ref} className = "post">
             <div className ="post__header">
                 <Avatar src= {avatar}/>
+                    {/* {user?.email[0]?.toUpperCase()} */}
+                {/* </Avatar> */}
                 <div className="post__info">
                     <h2>{name}</h2>
                     <p>{description}</p>
